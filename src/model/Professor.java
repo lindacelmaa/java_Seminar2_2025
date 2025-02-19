@@ -75,17 +75,18 @@ public class Professor{
 	}
 		
 	// argumenta konstruktors
-	public Professor(String name, String surname) {
+	public Professor(String name, String surname, Degree degree) {
 		setProfID();
 		setProfName(name);
 		setProfSurname(surname);
+		setDegree(degree);
 		
 	}
 	
 	//toString - parraksta object klases string funkciju
 	@Override
 	public String toString() {
-		return profID + ": " + profName + " " + profSurname;
+		return profID + ": " + profName + " " + profSurname + ", " + degree;
 	}
 	
 	
