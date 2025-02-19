@@ -24,7 +24,7 @@ public class Student {
 	
 	//setter
 	
-	public void setStID(long stID) {
+	public void setStID() {
 		stID= counter;
 		counter++;
 	}
@@ -47,4 +47,47 @@ public class Student {
 		}
 		
 	}
+	
+	//bez argumenta konstruktors
+	
+	public Student() {
+		setStID();
+		setName("Testa");
+		setSurname("Students");
+			
+	}
+		
+	// argumenta konstruktors
+	public Student(String name, String surname) {
+		setStID();
+		setName(name);
+		setSurname(surname);
+		
+	}
+	
+	//toString - parraksta object klases string funkciju
+	@Override
+	public String toString() {
+		return stID + ": " + name + " " + surname;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
