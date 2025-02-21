@@ -49,11 +49,21 @@ public class Course {
 		}
 	}
 
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
+	public void setProfessor(Professor inputProfessor) {
+		if(professor != null) {
+			professor = inputProfessor;
+		}else {
+			professor = new Professor();
+		}
 	}
 	
-	
+	public Course() {
+		setcID();
+		setTitle("Testa kurss");
+		setCreditPoints(1);
+		setProfessor(new Professor());
+		
+	}
 	
 	
 	
