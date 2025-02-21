@@ -224,6 +224,19 @@ public class MainService {
 		}
 		return count;
 	}
+	
+	//izfiltre un atgrie'z nesekmigas atzimes
+	//saskaita, cik ir kursi pie noteikta CP skaita
+	
+	public static ArrayList<Grade> badMarks(){
+		ArrayList<Grade> results = new ArrayList<Grade>();
+		
+		
+		
+	}
+	
+	
+	
 }
 
 
