@@ -66,5 +66,38 @@ public class MainService {
 		
 		
 	}
+	
+	//CRUD
+	//C-create
+	public static void createProfessor(String name, String surname, Degree degree) throws Exception{
+		//parbauda vai eksiste
+		for(Professor tempP : allProfessors) {
+			if(tempP.getProfName().equals(name)
+				&& tempP.getProfSurname().equals(surname)
+				&& tempP.getDegree().equals(degree)) {
+				throw new Exception("Profesors jau eksiste");
+			}
+		}
+		
+		allProfessors.add(new Professor(name, surname, degree));
+	}
+	
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
