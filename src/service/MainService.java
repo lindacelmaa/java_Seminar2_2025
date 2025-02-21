@@ -65,13 +65,21 @@ public class MainService {
 		System.out.println("");
 		
 		Course cr1 = new Course();
-		Course cr2 = new Course("Programmesana", 3, pr2);
+			Course cr2 = new Course("Programmesana", 3, pr2);
+			Course cr3 = new Course("Matematika", 2, pr2 );
+			Course cr4 = new Course("Haoss", 2, pr1 );
 		
-		//System.out.println(cr1);
-		//System.out.println(cr2);
+		try {
+			//System.out.println(cr1);
+			//System.out.println(cr2);
 		
-		allCourses.addAll(Arrays.asList(cr1, cr2));
-		System.out.println(allCourses);
+			allCourses.addAll(Arrays.asList(cr1, cr2, cr3, cr4));
+			System.out.println("Otraa profesora kursu skaits: " + courseCount(10001));
+			System.out.println(allCourses);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println("");
 		
@@ -199,6 +207,22 @@ public class MainService {
 		
 		return sum / gradesCount;
 		
+	}
+	
+	public static int courseCount(int id) throws Exception{
+		Professor foundProfessor = retrieveProfessorById(id);
+		
+		int count = 0;
+		
+		for (Course tempC : allCourses) {
+			if (tempC.getProfessor().getProfID() == id) {
+				count++;
+			}
+		}
+		if(count == 0) {
+			throw new Exception("Pasniedzejam nav kursu");
+		}
+		return count;
 	}
 }
 
