@@ -4,6 +4,7 @@ import model.Student;
 import model.Degree;
 import model.Professor;
 import model.Course;
+import model.Grade;
 
 public class MainService {
 
@@ -31,6 +32,12 @@ public class MainService {
 		
 		System.out.println(cr1);
 		System.out.println(cr2);
+		
+		System.out.println("");
+		Grade gr1 = new Grade();
+		Grade gr2 = new Grade(8, st2, cr2);
+		System.out.println(gr1);
+		System.out.println(gr2);
 		
 		
 	}
