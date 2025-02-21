@@ -49,6 +49,9 @@ public class MainService {
 			System.out.println("10001 profesors:" + retrieveProfessorById(10001).getProfSurname());
 			
 			updateProfessorById(10001, "Janis", "Ozolins", Degree.dr);
+			deleteProfessorById(10000);
+			System.out.println(allProfessors);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,6 +124,14 @@ public class MainService {
 			foundProfessor.setDegree(inputDegree);
 		}
 		
+		
+	}
+	
+	public static void deleteProfessorById(int id) throws Exception{
+		
+		Professor foundProfessor = retrieveProfessorById(id);
+		
+		allProfessors.remove(foundProfessor);
 		
 	}
 
