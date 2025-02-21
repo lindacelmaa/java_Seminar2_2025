@@ -3,6 +3,7 @@ package service;
 import model.Student;
 import model.Degree;
 import model.Professor;
+import model.Course;
 
 public class MainService {
 
@@ -23,6 +24,13 @@ public class MainService {
 		System.out.println(pr1);
 		System.out.println(pr2);
 		
+		System.out.println("");
+		
+		Course cr1 = new Course();
+		Course cr2 = new Course("Programmesana", 3, pr2);
+		
+		System.out.println(cr1);
+		System.out.println(cr2);
 		
 		
 	}

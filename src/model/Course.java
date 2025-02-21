@@ -26,7 +26,7 @@ public class Course {
 		return professor;
 	}
 
-	public void setcID(long cID) {
+	public void setcID() {
 		cID= counter;
 		counter++;
 	}
@@ -50,7 +50,7 @@ public class Course {
 	}
 
 	public void setProfessor(Professor inputProfessor) {
-		if(professor != null) {
+		if(inputProfessor != null) {
 			professor = inputProfessor;
 		}else {
 			professor = new Professor();
@@ -65,6 +65,17 @@ public class Course {
 		
 	}
 	
+	public Course(String title, int creditPoints, Professor professor) {
+		setcID();
+		setTitle(title);
+		setCreditPoints(creditPoints);
+		setProfessor(professor);
+	}
+	
+	@Override
+	public String toString() {
+		return cID + ": " + title + "; credit points - " + creditPoints + "; professor - " + professor.getProfName().charAt(0) + ". " + professor.getProfSurname();
+	}
 	
 	
 }
