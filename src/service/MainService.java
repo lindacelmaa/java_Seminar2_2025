@@ -46,11 +46,15 @@ public class MainService {
 		try{
 			//createProfessor("Karlis", "Immers", Degree.mg);
 			createProfessor("Karlis", "Immers", Degree.mg);
+			createProfessor("Raita", "Rollande", Degree.dr);
+			createProfessor("Juris", "Zagrs", Degree.dr);
 			System.out.println("10001 profesors:" + retrieveProfessorById(10001).getProfSurname());
 			
 			updateProfessorById(10001, "Janis", "Ozolins", Degree.dr);
 			deleteProfessorById(10000);
 			System.out.println(allProfessors);
+			
+			System.out.println("Profesori ar dr, gradu" + filterProfessorByDegree(Degree.dr));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,12 +74,20 @@ public class MainService {
 		System.out.println(allCourses);
 		
 		System.out.println("");
-		Grade gr1 = new Grade();
-		Grade gr2 = new Grade(8, st2, cr2);
-		//System.out.println(gr1);
-		//System.out.println(gr2);
 		
-		allGrades.addAll(Arrays.asList(gr1, gr2));
+		try {
+			Grade gr1 = new Grade();
+			Grade gr2 = new Grade(8, st2, cr2);
+			Grade gr3 = new Grade(5, st2, cr1);
+			//System.out.println(gr1);
+			//System.out.println(gr2);
+		
+			allGrades.addAll(Arrays.asList(gr1, gr2, gr3));
+			
+			System.out.println("Lindas videja atzime: " + averageGrade(1));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println(allGrades);
 		
 		
@@ -135,6 +147,59 @@ public class MainService {
 		
 	}
 
+	public static ArrayList<Professor> filterProfessorByDegree(Degree inputDegree) throws Exception{
+		if(inputDegree == null) {
+			throw new Exception("Nav pareiziievaditi dati");
+		}
+		
+		ArrayList<Professor> results = new ArrayList<Professor>();
+		
+		for(Professor tempP : allProfessors) {
+			if(tempP.getDegree().equals(inputDegree)) {
+				results.add(tempP);
+			}
+		}
+		
+		return results;
+	} 
+	
+	//aprekina videjo atzimi ja padod studenta id
+	
+	public static Student retrieveStudentById(int id) throws Exception {
+		if(id < 0) {
+			throw new Exception("ID nevar b'ut negativs");
+		}
+		
+		for(Student tempP : allStudents) {
+			if(tempP.getStID() == id){
+				return tempP;
+			}
+		}
+		
+		throw new Exception("Students ar noradito id neeksistee");
+	}
+	
+	public static float averageGrade(int id) throws Exception{
+		Student foundStudent = retrieveStudentById(id);
+		
+		int gradesCount = 0;
+		float sum = 0;
+		
+		for(Grade tempG : allGrades) {
+			if(tempG.getStudent().getStID() == id) {
+				gradesCount++;
+				sum += tempG.getValue();
+				
+			}
+		}
+		
+		if(gradesCount == 0) {
+			throw new Exception("Studentam nav neviena atz'ime");
+		}
+		
+		return sum / gradesCount;
+		
+	}
 }
 
 
