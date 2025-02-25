@@ -93,6 +93,10 @@ public class MainService {
 			allGrades.addAll(Arrays.asList(gr1, gr2, gr3));
 			
 			System.out.println("Lindas videja atzime: " + averageGrade(1));
+			System.out.println(allGrades);
+			System.out.println(badMarks());
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -171,7 +175,7 @@ public class MainService {
 		return results;
 	} 
 	
-	//aprekina videjo atzimi ja padod studenta id
+	
 	
 	public static Student retrieveStudentById(int id) throws Exception {
 		if(id < 0) {
@@ -201,13 +205,38 @@ public class MainService {
 			}
 		}
 		
+		
 		if(gradesCount == 0) {
 			throw new Exception("Studentam nav neviena atz'ime");
 		}
 		
 		return sum / gradesCount;
-		
 	}
+		
+	public static float averageWeightedGrade(int id) throws Exception{
+		
+		Student foundStudent = retrieveStudentById(id);
+		
+		int cpTimesGradeSum = 0;
+		float CPsum = 0;
+		
+		for(Grade tempG : allGrades) {
+			if(tempG.getStudent().getStID() == id) {
+				float grade = tempG.getValue();
+				float creditPoints = tempG.getCourse().getCreditPoints();
+				cpTimesGradeSum += grade * creditPoints;
+				CPsum += creditPoints;
+			}
+		}
+		
+		if (CPsum == 0) {
+			throw new Exception("Studentam nav neviena atzīme");
+			
+		}
+		
+		return cpTimesGradeSum/CPsum;
+	}
+		
 	
 	public static int courseCount(int id) throws Exception{
 		Professor foundProfessor = retrieveProfessorById(id);
@@ -225,17 +254,76 @@ public class MainService {
 		return count;
 	}
 	
-	//izfiltre un atgrie'z nesekmigas atzimes
+
 	//saskaita, cik ir kursi pie noteikta CP skaita
 	
 	public static ArrayList<Grade> badMarks(){
 		ArrayList<Grade> results = new ArrayList<Grade>();
 		
+		for(Grade tempG: allGrades) {
+			if(tempG.getValue() < 4)
+			{
+				results.add(tempG);
+			}
+		}
 		
+		return results;
 		
 	}
 	
 	
+	public static int courseCountByCreditPoints (int creditPointCount) throws Exception {
+		
+		int count = 0;
+		
+		for (Course tempC : allCourses) {
+			if(tempC.getCreditPoints() == creditPointCount) {
+				count++;
+			}
+		}
+		if (count == 0 ) {
+			throw new Exception("Nevienam kursam nav šāds kredītpunktu skaits");
+		}
+		return count;
+	}
+	
+	public static Course retrieveCoursetById(int id) throws Exception {
+		if(id < 0) {
+			throw new Exception("ID nevar b'ut negativs");
+		}
+		
+		for(Course tempC : allCourses) {
+			if(tempC.getcID() == id){
+				return tempC;
+			}
+		}
+		
+		throw new Exception("Kurss ar noradito id neeksistee");
+	}
+	
+	public static float averageGradeForCourse(int id) throws Exception{
+		Course foundCourse = retrieveCoursetById(id);
+		
+		int gradesCount = 0;
+		float sum = 0;
+		
+		for(Grade tempG : allGrades) {
+			if(tempG.getCourse().getcID() == id) {
+				gradesCount++;
+				sum += tempG.getValue();
+				
+			}
+		}
+		
+		
+		if(gradesCount == 0) {
+			throw new Exception("Kursā nav neviena atz'ime");
+		}
+		
+		return sum / gradesCount;
+	}
+	
+	//jasakarto pec vid atz
 	
 }
 
