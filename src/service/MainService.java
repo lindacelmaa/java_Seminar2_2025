@@ -48,7 +48,7 @@ public class MainService {
 			createProfessor("Karlis", "Immers", Degree.mg);
 			createProfessor("Raita", "Rollande", Degree.dr);
 			createProfessor("Juris", "Zagrs", Degree.dr);
-			System.out.println("10001 profesors:" + retrieveProfessorById(10001).getProfSurname());
+			System.out.println("10001 profesors:" + retrieveProfessorById(10001).getSurname());
 			
 			updateProfessorById(10001, "Janis", "Ozolins", Degree.dr);
 			deleteProfessorById(10000);
@@ -110,8 +110,8 @@ public class MainService {
 	public static void createProfessor(String name, String surname, Degree degree) throws Exception{
 		//parbauda vai eksiste
 		for(Professor tempP : allProfessors) {
-			if(tempP.getProfName().equals(name)
-				&& tempP.getProfSurname().equals(surname)
+			if(tempP.getName().equals(name)
+				&& tempP.getSurname().equals(surname)
 				&& tempP.getDegree().equals(degree)) {
 				throw new Exception("Profesors jau eksiste");
 			}
@@ -139,10 +139,10 @@ public class MainService {
 	public static void updateProfessorById(int id, String inputName, String inputSurname, Degree inputDegree) throws Exception {
 		Professor foundProfessor = retrieveProfessorById(id);
 		
-		if(inputName != null && !foundProfessor.getProfName().equals(inputName)) {
-			foundProfessor.setProfName(inputName);
-		} if(inputSurname != null && !foundProfessor.getProfSurname().equals(inputSurname)) {
-			foundProfessor.setProfSurname(inputSurname);
+		if(inputName != null && !foundProfessor.getName().equals(inputName)) {
+			foundProfessor.setName(inputName);
+		} if(inputSurname != null && !foundProfessor.getSurname().equals(inputSurname)) {
+			foundProfessor.setSurname(inputSurname);
 			
 		} if(inputDegree != null && !foundProfessor.getDegree().equals(inputDegree)) {
 			foundProfessor.setDegree(inputDegree);

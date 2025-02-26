@@ -74,7 +74,7 @@ public class Course {
 	
 	@Override
 	public String toString() {
-		return cID + ": " + title + "; credit points - " + creditPoints + "; professor - " + professor.getProfName().charAt(0) + ". " + professor.getProfSurname();
+		return cID + ": " + title + "; credit points - " + creditPoints + "; professor - " + professor.getName().charAt(0) + ". " + professor.getSurname();
 	}
 	
 	
