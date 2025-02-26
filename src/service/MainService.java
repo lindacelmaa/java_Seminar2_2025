@@ -5,14 +5,14 @@ import model.Degree;
 import model.Professor;
 import model.Course;
 import model.Grade;
+import model.Person;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainService {
 	
 	
-	private static ArrayList<Student> allStudents = new ArrayList<Student>();
-	private static ArrayList<Professor> allProfessors = new ArrayList<Professor>();
+	private static ArrayList<Person> allPersons = new ArrayList<Person>();
 	private static ArrayList<Course> allCourses= new ArrayList<Course>();
 	private static ArrayList<Grade> allGrades = new ArrayList<Grade>();
 	
@@ -30,8 +30,8 @@ public class MainService {
 		//System.out.println(st3);
 		
 		
-		allStudents.addAll(Arrays.asList(st1, st2, st3));
-		System.out.println(allStudents);
+		allPersons.addAll(Arrays.asList(st1, st2, st3));
+		System.out.println(allPersons);
 		
 		
 		System.out.println("");
@@ -41,7 +41,7 @@ public class MainService {
 		//System.out.println(pr1);
 		//System.out.println(pr2);
 		
-		allProfessors.addAll(Arrays.asList(pr1, pr2));
+		allPersons.addAll(Arrays.asList(pr1, pr2));
 		
 		try{
 			//createProfessor("Karlis", "Immers", Degree.mg);
@@ -52,7 +52,7 @@ public class MainService {
 			
 			updateProfessorById(10001, "Janis", "Ozolins", Degree.dr);
 			deleteProfessorById(10000);
-			System.out.println(allProfessors);
+			System.out.println(allPersons);
 			
 			System.out.println("Profesori ar dr, gradu" + filterProfessorByDegree(Degree.dr));
 			
@@ -60,7 +60,7 @@ public class MainService {
 			e.printStackTrace();
 		}
 		
-		System.out.println(allProfessors);
+		System.out.println(allPersons);
 		
 		System.out.println("");
 		
@@ -109,15 +109,18 @@ public class MainService {
 	//C-create
 	public static void createProfessor(String name, String surname, Degree degree) throws Exception{
 		//parbauda vai eksiste
-		for(Professor tempP : allProfessors) {
-			if(tempP.getName().equals(name)
-				&& tempP.getSurname().equals(surname)
-				&& tempP.getDegree().equals(degree)) {
-				throw new Exception("Profesors jau eksiste");
+		for(Person tempP : allPersons) {
+			if(tempP instanceof Professor) {
+				Professor tempPP = (Professor)tempP;
+				if(tempPP.getName().equals(name)
+						&& tempPP.getSurname().equals(surname)
+						&& tempPP.getDegree().equals(degree)) {
+					throw new Exception("Profesors jau eksiste");
+				}
 			}
 		}
 		
-		allProfessors.add(new Professor(name, surname, degree));
+		allPersons.add(new Professor(name, surname, degree));
 	}
 	
 	//r = retrieve
@@ -127,9 +130,13 @@ public class MainService {
 			throw new Exception("ID nevar b'ut negativs");
 		}
 		
-		for(Professor tempP : allProfessors) {
-			if(tempP.getProfID() == id){
-				return tempP;
+		for(Person tempP : allPersons) {
+			if(tempP instanceof Professor) {
+				Professor tempPP = (Professor)tempP;
+			
+				if(tempPP.getProfID() == id){
+					return tempPP;
+				}
 			}
 		}
 		
@@ -155,7 +162,7 @@ public class MainService {
 		
 		Professor foundProfessor = retrieveProfessorById(id);
 		
-		allProfessors.remove(foundProfessor);
+		allPersons.remove(foundProfessor);
 		
 	}
 
@@ -166,9 +173,12 @@ public class MainService {
 		
 		ArrayList<Professor> results = new ArrayList<Professor>();
 		
-		for(Professor tempP : allProfessors) {
-			if(tempP.getDegree().equals(inputDegree)) {
-				results.add(tempP);
+		for(Person tempP : allPersons) {
+			if(tempP instanceof Professor) {
+				Professor tempPP = (Professor) tempP;
+				if(tempPP.getDegree().equals(inputDegree)) {
+				results.add(tempPP);
+				}
 			}
 		}
 		
@@ -182,9 +192,12 @@ public class MainService {
 			throw new Exception("ID nevar b'ut negativs");
 		}
 		
-		for(Student tempP : allStudents) {
-			if(tempP.getStID() == id){
-				return tempP;
+		for(Person tempP : allPersons) {
+			if(tempP instanceof Student) {
+				Student tempPP = (Student) tempP;
+				if(tempPP.getStID() == id){
+				return tempPP;
+				}
 			}
 		}
 		
