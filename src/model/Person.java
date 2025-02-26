@@ -44,6 +44,7 @@ public class Person {
 		setSurname(surname);
 	}
 	
+	@Override
 	public String toString() {
 		return name + " " + surname;
 	}

@@ -1,24 +1,14 @@
 package model;
 
-public class Student {
+public class Student extends Person{
 	//mainigie
 	private long stID;
-	private String name;
-	private String surname;
 	
 	private static long counter = 0;
 	
 	//getters
 	public long getStID() {
 		return stID;
-	}
-	
-	public String getName(){
-		return name;
-	}
-	
-	public String getSurname() {
-		return surname;
 	}
 
 	
@@ -27,50 +17,29 @@ public class Student {
 	public void setStID() {
 		stID= counter;
 		counter++;
-	}
-
-	public void setName(String inputName) {
-		if(inputName != null 
-				&& inputName.matches("[A-Z]{1}[a-z]{3,10}([ ][A-Z]{1}[a-z]{3,10})?")){
-			name = inputName;
-		}else {
-			surname = "unknown";
-		}
-		
-		
-	}
-
-	public void setSurname(String inputSurname) {
-		if(inputSurname != null
-				&& inputSurname.matches("[A-Z]{1}[a-z]{3,10}([-][A-Z]{1}[a-z]{3,10})?")) {
-			surname = inputSurname;
-		} else {
-			surname = "unknown";
-		}
 		
 	}
 	
 	//bez argumenta konstruktors
 	
 	public Student() {
+		super(); // izsaukts bazes klases constructors
 		setStID();
-		setName("Testa");
-		setSurname("Students");
+		setSurname("Students"); //izsaukta no bazes klases
 			
 	}
 		
 	// argumenta konstruktors
 	public Student(String name, String surname) {
+		super(name, surname);
 		setStID();
-		setName(name);
-		setSurname(surname);
 		
 	}
 	
 	//toString - parraksta object klases string funkciju
 	@Override
 	public String toString() {
-		return stID + ": " + name + " " + surname;
+		return stID + ": " +  super.toString();
 	}
 	
 	

@@ -1,10 +1,8 @@
 package model;
 
-public class Professor{
+public class Professor extends Person{
 	//mainigie
 	private long profID;
-	private String profName;
-	private String profSurname;
 	private Degree degree;
 	
 	
@@ -15,13 +13,6 @@ public class Professor{
 		return profID;
 	}
 	
-	public String getProfName(){
-		return profName;
-	}
-	
-	public String getProfSurname() {
-		return profSurname;
-	}
 	
 	public Degree getDegree() {
 		return degree;
@@ -35,26 +26,6 @@ public class Professor{
 		counter++;
 	}
 
-	public void setProfName(String inputName) {
-		if(inputName != null 
-				&& inputName.matches("[A-Z]{1}[a-z]{3,10}([ ][A-Z]{1}[a-z]{3,10})?")){
-			profName = inputName;
-		}else {
-			profName = "unknown";
-		}
-		
-		
-	}
-
-	public void setProfSurname(String inputSurname) {
-		if(inputSurname != null
-				&& inputSurname.matches("[A-Z]{1}[a-z]{3,10}([-][A-Z]{1}[a-z]{3,10})?")) {
-			profSurname = inputSurname;
-		} else {
-			profSurname = "unknown";
-		}
-		
-	}
 	
 	public void setDegree(Degree inputDegree) {
 		if(inputDegree != null) {
@@ -67,18 +38,16 @@ public class Professor{
 	//bez argumenta konstruktors
 	
 	public Professor() {
+		super();
 		setProfID();
-		setProfName("Testa");
-		setProfSurname("Profesors");
 		setDegree(Degree.Isc);
 			
 	}
 		
 	// argumenta konstruktors
 	public Professor(String name, String surname, Degree degree) {
+		super(name, surname);
 		setProfID();
-		setProfName(name);
-		setProfSurname(surname);
 		setDegree(degree);
 		
 	}
@@ -86,7 +55,7 @@ public class Professor{
 	//toString - parraksta object klases string funkciju
 	@Override
 	public String toString() {
-		return profID + ": " + profName + " " + profSurname + ", " + degree;
+		return profID + ": " + super.toString() + ", " + degree;
 	}
 	
 	
