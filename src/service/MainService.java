@@ -52,15 +52,25 @@ public class MainService {
 			
 			updateProfessorById(10001, "Janis", "Ozolins", Degree.dr);
 			deleteProfessorById(10000);
-			System.out.println(allPersons);
 			
 			System.out.println("Profesori ar dr, gradu" + filterProfessorByDegree(Degree.dr));
+			for (Person tempP:allPersons) {
+				if(tempP instanceof Professor) {
+					System.out.print(tempP + " ");
+				}
+			}
+			System.out.println();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println(allPersons);
+		for (Person tempP:allPersons) {
+			if(tempP instanceof Student) {
+				System.out.print(tempP + " ");
+			}
+		}
+		System.out.println();
 		
 		System.out.println("");
 		
